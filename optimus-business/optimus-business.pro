@@ -1,4 +1,5 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    optimus-business
+    optimus-business \
+    liboptimus-qt

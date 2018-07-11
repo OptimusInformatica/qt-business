@@ -1,0 +1,124 @@
+﻿drop table if exists bsn_clientes;
+create table bsn_clientes
+(
+  cod_cliente serial not null,
+  key_cliente char(36) not null,
+  key_usuario char(36) not null,
+  cliente varchar(25) not null,
+  nome varchar(50) not null,
+  documento varchar(18),
+  ie varchar(18),
+  im varchar(18),
+  registro timestamp not null default now(),
+  primary key (cod_cliente),
+  unique (key_cliente),
+  unique (cliente)
+);
+
+drop table if exists bsn_clientes_addr;
+create table bsn_clientes_addr
+(
+  cod_addr serial not null,
+  key_cliente char(36) not null,
+  key_usuario char(36) not null,
+  cep char(9),
+  rua varchar(70),
+  numero int,
+  complemento varchar(30),
+  bairro varchar(50),
+  cidade varchar(50),
+  uf char(2),
+  registro timestamp not null default now(),
+  primary key (cod_addr),
+  unique (cep, key_cliente, numero)
+);
+
+drop table if exists bsn_clientes_mail;
+create table bsn_clientes_mail
+(
+  cod_mail serial not null,
+  key_cliente char(36) not null,
+  key_usuario char(36) not null,
+  email varchar(70),
+  phone varchar(15),
+  registro timestamp not null default now(),
+  primary key (cod_mail),
+  unique (email, key_cliente, phone)
+);
+
+create or replace function bsn_before_insert_clientes() returns trigger as $$
+  begin
+    new.cod_cliente = nextval('bsn_clientes_cod_cliente_seq');
+    new.key_cliente = uuid_generate_v4();
+    return new;
+  end;
+$$ language 'plpgsql';
+create trigger bsn_before_insert_clientes before insert on bsn_clientes for each row execute procedure bsn_before_insert_clientes();
+
+create or replace function bsn_after_insert_clientes() returns trigger as $$
+  begin
+    insert into bsn_clientes_addr (key_cliente, key_usuario) values (new.key_cliente, new.key_usuario);
+    insert into bsn_clientes_mail (key_cliente, key_usuario) values (new.key_cliente, new.key_usuario);
+
+drop trigger if exists bsn_ainsert_clientes$
+create trigger bsn_ainsert_clientes after insert on bsn_clientes for each row begin
+  insert into bsn_clientes_addr VALUES (null, new.key_cliente, new.key_usuario, null, null, null, null, null, null, null, now());
+    insert into bsn_clientes_mail VALUES (null, new.key_cliente, new.key_usuario, null, null, now());
+end$
+
+drop trigger if exists bsn_adelete_clientes$
+create trigger bsn_adelete_clientes after delete on bsn_clientes for each row begin
+  delete from bsn_clientes_addr where key_cliente=old.key_cliente;
+  delete from bsn_clientes_mail where key_cliente=old.key_cliente;
+end$
+
+drop trigger if exists bsn_binsert_clientes_addr$
+create trigger bsn_ainsert_clientes_addr before insert on bsn_clientes_addr for each row begin
+  declare rua_ varchar(70);
+  declare bairro_ varchar(70);
+  declare cidade_ varchar(50);
+  declare uf_ char(2);
+  if (new.cep is not null) then
+    if (new.rua is null or new.bairro is null or new.cidade is null or new.uf is null) then
+    select rua, bairro, cidade, uf into rua_, bairro_, cidade_, uf_ from bsn_address where cep=new.cep;
+    end if;
+    if (new.rua is null) then
+      set new.rua = rua_;
+  end if;
+    if (new.bairro is null) then
+      set new.bairro = bairro_;
+  end if;
+    if (new.cidade is null) then
+      set new.cidade = cidade_;
+  end if;
+    if (new.uf is null) then
+      set new.uf = uf_;
+  end if;
+  end if;
+end;$
+
+drop trigger if exists bsn_bupdade_clientes_addr$
+create trigger bsn_bupdade_clientes_addr before update on bsn_clientes_addr for each row begin
+  declare rua_ varchar(70);
+  declare bairro_ varchar(70);
+  declare cidade_ varchar(50);
+  declare uf_ char(2);
+  if (new.cep is not null) then
+    if (new.rua is null or new.bairro is null or new.cidade is null or new.uf is null) then
+    select rua, bairro, cidade, uf into rua_, bairro_, cidade_, uf_ from bsn_address where cep=new.cep;
+    end if;
+    if (new.rua is null) then
+      set new.rua = rua_;
+  end if;
+    if (new.bairro is null) then
+      set new.bairro = bairro_;
+  end if;
+    if (new.cidade is null) then
+      set new.cidade = cidade_;
+  end if;
+    if (new.uf is null) then
+      set new.uf = uf_;
+  end if;
+  end if;
+end;$
+delimiter ;

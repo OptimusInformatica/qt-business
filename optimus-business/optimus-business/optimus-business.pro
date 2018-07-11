@@ -4,11 +4,13 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = optimus-business
+VERSION = 1.0.0
+
+TARGET = business
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -32,3 +34,5 @@ HEADERS += \
 
 FORMS += \
         mainbusiness.ui
+
+DESTDIR = ../bin
