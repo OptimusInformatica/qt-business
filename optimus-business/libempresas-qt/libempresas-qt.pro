@@ -1,21 +1,23 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2018-07-10T07:03:56
+# Project created by QtCreator 2018-07-11T08:50:12
 #
 #-------------------------------------------------
+
 include("../optimus-business.pro")
-QT       += widgets network sql xml
+
+QT       += widgets sql xml
 QT       -= gui
 
-win32:VERSION = $${LIB_OPTIMUS_MAJ}.$${LIB_OPTIMUS_MIN}.$${LIB_OPTIMUS_PAT}.$${LIB_OPTIMUS_BLD}
-else:VERSION = $${LIB_OPTIMUS_MAJ}.$${LIB_OPTIMUS_MIN}.$${LIB_OPTIMUS_PAT}
+win32:VERSION = $${LIB_EMPRESAS_MAJ}.$${LIB_EMPRESAS_MIN}.$${LIB_EMPRESAS_PAT}.$${LIB_EMPRESAS_BLD}
+else:VERSION = $${LIB_EMPRESAS_MAJ}.$${LIB_EMPRESAS_MIN}.$${LLIB_EMPRESAS_PAT}
 
-win32:TARGET = liboptimus
-else:TARGET = optimus
+win32:TARGET = libempresas
+else:TARGET = empresas
 
 TEMPLATE = lib
 
-DEFINES += LIBOPTIMUSQT_LIBRARY
+DEFINES += LIBEMPRESASQT_LIBRARY
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -28,10 +30,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+SOURCES += empresas.cpp
 
-SOURCES += optimus.cpp
-
-HEADERS += optimus.h liboptimus-qt_global.h version.h
+HEADERS += empresas.h libempresas-qt_global.h
 
 unix {
     target.path = /usr/lib
@@ -39,4 +40,3 @@ unix {
 }
 
 DESTDIR = ../lib
-

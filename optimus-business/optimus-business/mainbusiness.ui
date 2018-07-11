@@ -1,24 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainBusiness</class>
- <widget class="QMainWindow" name="MainBusiness" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="MainBusiness">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>771</width>
+    <height>411</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>MainBusiness</string>
   </property>
-  <widget class="QMenuBar" name="menuBar" />
-  <widget class="QToolBar" name="mainToolBar" />
-  <widget class="QWidget" name="centralWidget" />
-  <widget class="QStatusBar" name="statusBar" />
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>771</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuArquivo">
+    <property name="title">
+     <string>Arquivo</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuUsu_rios">
+    <property name="title">
+     <string>Editar</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuEmpresas">
+    <property name="title">
+     <string>Registros</string>
+    </property>
+    <widget class="QMenu" name="regProdutos">
+     <property name="title">
+      <string>Produtos</string>
+     </property>
+     <addaction name="regFabricantes"/>
+     <addaction name="regTipos"/>
+     <addaction name="regCategorias"/>
+    </widget>
+    <addaction name="regUsuarios"/>
+    <addaction name="regEmpresas"/>
+    <addaction name="regClientes"/>
+    <addaction name="regProdutos"/>
+   </widget>
+   <widget class="QMenu" name="menuClientes">
+    <property name="title">
+     <string>Registrar</string>
+    </property>
+    <widget class="QMenu" name="addProdutos">
+     <property name="title">
+      <string>Produtos</string>
+     </property>
+     <addaction name="addFabricantes"/>
+     <addaction name="addTipos"/>
+     <addaction name="addCategorias"/>
+    </widget>
+    <addaction name="addUsuarios"/>
+    <addaction name="separator"/>
+    <addaction name="addEmpresas"/>
+    <addaction name="separator"/>
+    <addaction name="addClientes"/>
+    <addaction name="separator"/>
+    <addaction name="addProdutos"/>
+   </widget>
+   <addaction name="menuArquivo"/>
+   <addaction name="menuUsu_rios"/>
+   <addaction name="menuEmpresas"/>
+   <addaction name="menuClientes"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="regUsuarios">
+   <property name="text">
+    <string>Usuários</string>
+   </property>
+  </action>
+  <action name="regEmpresas">
+   <property name="text">
+    <string>Empresas</string>
+   </property>
+  </action>
+  <action name="regClientes">
+   <property name="text">
+    <string>Clientes</string>
+   </property>
+  </action>
+  <action name="regFabricantes">
+   <property name="text">
+    <string>Fabricantes</string>
+   </property>
+  </action>
+  <action name="regTipos">
+   <property name="text">
+    <string>Tipos</string>
+   </property>
+  </action>
+  <action name="regCategorias">
+   <property name="text">
+    <string>Categorias</string>
+   </property>
+  </action>
+  <action name="addUsuarios">
+   <property name="text">
+    <string>Usuários</string>
+   </property>
+  </action>
+  <action name="addEmpresas">
+   <property name="text">
+    <string>Empresas</string>
+   </property>
+  </action>
+  <action name="addClientes">
+   <property name="text">
+    <string>Clientes</string>
+   </property>
+  </action>
+  <action name="addFabricantes">
+   <property name="text">
+    <string>Fabricantes</string>
+   </property>
+  </action>
+  <action name="addTipos">
+   <property name="text">
+    <string>Tipos</string>
+   </property>
+  </action>
+  <action name="addCategorias">
+   <property name="text">
+    <string>Categorias</string>
+   </property>
+  </action>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
 </ui>

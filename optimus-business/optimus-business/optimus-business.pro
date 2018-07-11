@@ -3,12 +3,16 @@
 # Project created by QtCreator 2018-07-10T06:42:24
 #
 #-------------------------------------------------
+include("../optimus-business.pro")
 
 QT       += core gui sql printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+LIB_EMPRESAS_VER_MAJ = 1
+LIB_OPTIMUS_VER_MAJ = 1
 
-VERSION = 1.0.0
+win32:VERSION = 1.0.0.1
+else:VERSION = 1.0.0
 
 TARGET = business
 TEMPLATE = app
@@ -25,14 +29,28 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
+
 SOURCES += \
         main.cpp \
         mainbusiness.cpp
 
 HEADERS += \
-        mainbusiness.h
+        mainbusiness.h \
+    version.h
 
 FORMS += \
         mainbusiness.ui
 
 DESTDIR = ../bin
+
+message($$LIB_EMPRESAS_VER_MAJ);
+
+
+win32 {
+    LIBS += -L../lib -llibempresas$${LIB_EMPRESAS_MAJ} -lliboptimus$${LIB_OPTIMUS_MAJ}
+} else {
+    LIBS += -L../lib -lempresas -loptimus
+}
+
+DISTFILES += business.rc
+RC_FILE = business.rc
