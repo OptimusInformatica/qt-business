@@ -32,14 +32,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainbusiness.cpp
+        mainbusiness.cpp \
+    empresas/formempresas.cpp
 
 HEADERS += \
         mainbusiness.h \
-    version.h
+    version.h \
+    empresas/formempresas.h
 
 FORMS += \
-        mainbusiness.ui
+        mainbusiness.ui \
+    empresas/formempresas.ui
 
 DESTDIR = ../bin
 

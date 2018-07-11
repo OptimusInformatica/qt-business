@@ -17,6 +17,9 @@ public:
 
 private:
     Ui::MainBusiness *ui;
+
+public slots:
+    void openFormEmpresas();
 };
 
 #endif // MAINBUSINESS_H

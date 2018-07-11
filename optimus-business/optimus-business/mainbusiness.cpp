@@ -1,9 +1,9 @@
 #include "mainbusiness.h"
 #include "ui_mainbusiness.h"
 
-MainBusiness::MainBusiness(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainBusiness)
+#include "empresas/formempresas.h"
+
+MainBusiness::MainBusiness(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainBusiness)
 {
     ui->setupUi(this);
 }
@@ -11,4 +11,11 @@ MainBusiness::MainBusiness(QWidget *parent) :
 MainBusiness::~MainBusiness()
 {
     delete ui;
+}
+
+
+void MainBusiness::openFormEmpresas()
+{
+    FormEmpresas *fm = new FormEmpresas(this);
+    fm->show();
 }

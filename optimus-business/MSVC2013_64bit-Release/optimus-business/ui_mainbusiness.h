@@ -18,6 +18,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTableView>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
@@ -39,6 +40,7 @@ public:
     QAction *addTipos;
     QAction *addCategorias;
     QWidget *centralWidget;
+    QTableView *tableView;
     QMenuBar *menuBar;
     QMenu *menuArquivo;
     QMenu *menuUsu_rios;
@@ -53,7 +55,7 @@ public:
     {
         if (MainBusiness->objectName().isEmpty())
             MainBusiness->setObjectName(QStringLiteral("MainBusiness"));
-        MainBusiness->resize(771, 411);
+        MainBusiness->resize(1024, 600);
         regUsuarios = new QAction(MainBusiness);
         regUsuarios->setObjectName(QStringLiteral("regUsuarios"));
         regEmpresas = new QAction(MainBusiness);
@@ -80,10 +82,13 @@ public:
         addCategorias->setObjectName(QStringLiteral("addCategorias"));
         centralWidget = new QWidget(MainBusiness);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        tableView = new QTableView(centralWidget);
+        tableView->setObjectName(QStringLiteral("tableView"));
+        tableView->setGeometry(QRect(10, 10, 1001, 521));
         MainBusiness->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainBusiness);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 771, 21));
+        menuBar->setGeometry(QRect(0, 0, 1024, 21));
         menuArquivo = new QMenu(menuBar);
         menuArquivo->setObjectName(QStringLiteral("menuArquivo"));
         menuUsu_rios = new QMenu(menuBar);
@@ -127,6 +132,7 @@ public:
         addProdutos->addAction(addCategorias);
 
         retranslateUi(MainBusiness);
+        QObject::connect(regEmpresas, SIGNAL(triggered()), MainBusiness, SLOT(openFormEmpresas()));
 
         QMetaObject::connectSlotsByName(MainBusiness);
     } // setupUi

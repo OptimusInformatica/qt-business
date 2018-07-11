@@ -1,6 +1,6 @@
 #include "empresas.h"
 
 
-Empresas::Empresas()
+Empresas::Empresas(QObject *parent) : QObject(parent)
 {
 }
